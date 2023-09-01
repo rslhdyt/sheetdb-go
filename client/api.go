@@ -28,7 +28,6 @@ func New(username string, password string, documentId string) *API {
 			DocumentId: documentId,
 
 			BaseUrl: "https://sheetdb.io",
-			// BaseUrl: "https://webhook.site/08b7687d-e470-4d40-8ee6-2072204685f8",
 		},
 		apiRequester: sheetdb.GetAPIRequester(),
 	}
