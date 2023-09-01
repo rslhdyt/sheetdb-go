@@ -47,9 +47,9 @@ func main() {
 ```
 
 ### Todo
-- [v] Read
-- [x] Search
-- [x] Create
-- [x] Update
-- [x] Delete
-- [x] Unit Test
+- [x] Read
+- [ ] Search
+- [ ] Create
+- [ ] Update
+- [ ] Delete
+- [ ] Unit Test
