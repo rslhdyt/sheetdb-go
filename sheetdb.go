@@ -5,6 +5,7 @@ import (
 	"sync"
 )
 
+// Option represents a set of options that can be used to configure the behavior of a client.
 type Option struct {
 	Username   string
 	Password   string
@@ -13,20 +14,23 @@ type Option struct {
 	BaseUrl string
 }
 
-var apiRequesterWrapper APIRequesterWrapper = APIRequesterWrapper{
-	mu:           new(sync.RWMutex),
-	apiRequester: &APIRequesterImpl{HTTPClient: &http.Client{}},
+// APICallerWrapper wraps an APICaller and guards all methods with a mutex.
+// It provides thread-safe access to the APICaller.
+var apiCallerWrapper APICallerWrapper = APICallerWrapper{
+	mu:        new(sync.RWMutex),
+	apiCaller: &APICallerImpl{HTTPClient: &http.Client{}},
 }
 
-// APIRequesterWrapper is the APIRequester with locker for setting the APIRequester
-type APIRequesterWrapper struct {
-	apiRequester APIRequester
-	mu           *sync.RWMutex
+// APICallerWrapper is the APICaller with locker for setting the APICaller
+type APICallerWrapper struct {
+	apiCaller   APICaller
+	mu          *sync.RWMutex
 }
 
-func GetAPIRequester() APIRequester {
-	apiRequesterWrapper.mu.RLock()
-	defer apiRequesterWrapper.mu.RUnlock()
+// GetAPICaller returns the current API caller.
+func GetAPICaller() APICaller {
+	apiCallerWrapper.mu.RLock()
+	defer apiCallerWrapper.mu.RUnlock()
 
-	return apiRequesterWrapper.apiRequester
+	return apiCallerWrapper.apiCaller
 }

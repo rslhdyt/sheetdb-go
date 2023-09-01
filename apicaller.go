@@ -10,23 +10,22 @@ import (
 	"reflect"
 )
 
-type APIRequester interface {
+type APICaller interface {
 	Call(
 		ctx context.Context,
 		method string,
 		url string,
 		opt Option,
 		body interface{},
-		headers http.Header,
 		response interface{},
 	) error
 }
 
-type APIRequesterImpl struct {
+type APICallerImpl struct {
 	HTTPClient *http.Client
 }
 
-func (a *APIRequesterImpl) Call(ctx context.Context, method string, url string, opt Option, body interface{}, headers http.Header, response interface{}) error {
+func (a *APICallerImpl) Call(ctx context.Context, method string, url string, opt Option, body interface{}, response interface{}) error {
 	requestBody := []byte("")
 
 	var request *http.Request
@@ -59,7 +58,7 @@ func (a *APIRequesterImpl) Call(ctx context.Context, method string, url string, 
 	return a.do(request, response)
 }
 
-func (a *APIRequesterImpl) do(request *http.Request, response interface{}) error {
+func (a *APICallerImpl) do(request *http.Request, response interface{}) error {
 	httpResponse, err := a.HTTPClient.Do(request)
 
 	if err != nil {
@@ -74,8 +73,8 @@ func (a *APIRequesterImpl) do(request *http.Request, response interface{}) error
 		return err
 	}
 
-	if httpResponse.StatusCode < 200 && httpResponse.StatusCode > 299 {
-		err := errors.New("HTTP ERROR")
+	if httpResponse.StatusCode < 200 || httpResponse.StatusCode > 299 {
+		err := errors.New("HTTP ERROR: " + string(responseBody))
 
 		return err
 	}

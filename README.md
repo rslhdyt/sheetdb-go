@@ -46,9 +46,12 @@ func main() {
 }
 ```
 
+### Examples
+For more examples, please check example directory.
+
 ### Todo
 - [x] Read
-- [ ] Search
+- [x] Search
 - [ ] Create
 - [ ] Update
 - [ ] Delete

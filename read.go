@@ -13,7 +13,9 @@ type GetContentParams struct {
 	Mode           string `json:"mode"`
 }
 
-type Content []map[string]interface{}
+type Content map[string]interface{}
+
+type Contents []Content
 
 type TableKeys []map[string]interface{}
 
