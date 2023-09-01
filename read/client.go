@@ -2,35 +2,33 @@ package read
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"net/http"
-	"net/url"
-	"strings"
+
+	"github.com/rslhdyt/sheetdb-go"
 )
 
 type Client struct {
-	opt 			sheetdb.Option
-	apiRequester 	sheetdb.APIRequester
+	Opt          *sheetdb.Option
+	APIRequester sheetdb.APIRequester
 }
 
-func (c *Client) GetContent(data *GetContentParams) (*sheetdb.Content, *sheetdb.Error) {
+func (c *Client) GetContent(body *sheetdb.GetContentParams) (*sheetdb.Content, error) {
 	ctx := context.Background()
 
 	response := &sheetdb.Content{}
 	headers := http.Header{}
 
-	path = fmt.Sprintf("%s/api/v1/%s", c.opt.BaseUrl, c.opt.DocumentId)
+	path := fmt.Sprintf("%s/api/v1/%s", c.Opt.BaseUrl, c.Opt.DocumentId)
 
-	err := APIRequester.Call(
-		ctx, 
-		http.MethodGet, 
-		c.opt, 
-		path, 
-		data, 
-		headers, 
-		response
+	err := c.APIRequester.Call(
+		ctx,
+		http.MethodGet,
+		path,
+		*c.Opt,
+		body,
+		headers,
+		response,
 	)
 
 	if err != nil {
@@ -40,22 +38,22 @@ func (c *Client) GetContent(data *GetContentParams) (*sheetdb.Content, *sheetdb.
 	return response, nil
 }
 
-func (c *Client) GetKeys() (*sheetdb.TableKeys, *sheetdb.Error) {
+func (c *Client) GetKeys() (*sheetdb.TableKeys, error) {
 	ctx := context.Background()
 
 	response := &sheetdb.TableKeys{}
 	headers := http.Header{}
 
-	path = fmt.Sprintf("%s/api/v1/%s/keys", c.opt.BaseUrl, c.opt.DocumentId)
+	path := fmt.Sprintf("%s/api/v1/%s/keys", c.Opt.BaseUrl, c.Opt.DocumentId)
 
-	err := APIRequester.Call(
-		ctx, 
-		http.MethodGet, 
-		c.opt, 
-		path, 
-		nil, 
-		headers, 
-		response
+	err := c.APIRequester.Call(
+		ctx,
+		http.MethodGet,
+		path,
+		*c.Opt,
+		nil,
+		headers,
+		response,
 	)
 
 	if err != nil {
@@ -65,22 +63,22 @@ func (c *Client) GetKeys() (*sheetdb.TableKeys, *sheetdb.Error) {
 	return response, nil
 }
 
-func (c *Client) DocumentName() (*sheetdb.DocumentName, *sheetdb.Error) {
+func (c *Client) DocumentName() (*sheetdb.DocumentName, error) {
 	ctx := context.Background()
 
 	response := &sheetdb.DocumentName{}
 	headers := http.Header{}
 
-	path = fmt.Sprintf("%s/api/v1/%s/name", c.opt.BaseUrl, c.opt.DocumentId)
+	path := fmt.Sprintf("%s/api/v1/%s/name", c.Opt.BaseUrl, c.Opt.DocumentId)
 
-	err := APIRequester.Call(
-		ctx, 
-		http.MethodGet, 
-		c.opt, 
-		path, 
-		nil, 
-		headers, 
-		response
+	err := c.APIRequester.Call(
+		ctx,
+		http.MethodGet,
+		path,
+		*c.Opt,
+		nil,
+		headers,
+		response,
 	)
 
 	if err != nil {
@@ -90,22 +88,22 @@ func (c *Client) DocumentName() (*sheetdb.DocumentName, *sheetdb.Error) {
 	return response, nil
 }
 
-func (c *Client) Count() (*sheetdb.Count, *sheetdb.Error) {
+func (c *Client) Count() (*sheetdb.Count, error) {
 	ctx := context.Background()
 
 	response := &sheetdb.Count{}
 	headers := http.Header{}
 
-	path = fmt.Sprintf("%s/api/v1/%s/count", c.opt.BaseUrl, c.opt.DocumentId)
+	path := fmt.Sprintf("%s/api/v1/%s/count", c.Opt.BaseUrl, c.Opt.DocumentId)
 
-	err := APIRequester.Call(
-		ctx, 
-		http.MethodGet, 
-		c.opt, 
-		path, 
-		nil, 
-		headers, 
-		response
+	err := c.APIRequester.Call(
+		ctx,
+		http.MethodGet,
+		path,
+		*c.Opt,
+		nil,
+		headers,
+		response,
 	)
 
 	if err != nil {
