@@ -7,11 +7,11 @@ import (
 )
 
 type API struct {
-	opt          sheetdb.Option
-	apiCaller sheetdb.APICaller
+	opt         sheetdb.Option
+	apiCaller   sheetdb.APICaller
 
-	Read   *read.Client
-	Search *search.Client
+	Read        *read.Client
+	Search      *search.Client
 	// Create		 *create.Client
 	// Update	 	 *update.Client
 	// Delete		 *delete.Client

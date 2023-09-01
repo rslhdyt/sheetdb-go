@@ -10,6 +10,7 @@ import (
 	"reflect"
 )
 
+// Call calls the API and returns the response.
 type APICaller interface {
 	Call(
 		ctx context.Context,
@@ -21,6 +22,8 @@ type APICaller interface {
 	) error
 }
 
+// APICallerImpl is an implementation of APICaller that uses an
+// HTTP client to call the API.
 type APICallerImpl struct {
 	HTTPClient *http.Client
 }

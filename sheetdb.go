@@ -17,20 +17,20 @@ type Option struct {
 // APICallerWrapper wraps an APICaller and guards all methods with a mutex.
 // It provides thread-safe access to the APICaller.
 var apiCallerWrapper APICallerWrapper = APICallerWrapper{
-	mu:        new(sync.RWMutex),
+	mutex:     new(sync.RWMutex),
 	apiCaller: &APICallerImpl{HTTPClient: &http.Client{}},
 }
 
 // APICallerWrapper is the APICaller with locker for setting the APICaller
 type APICallerWrapper struct {
 	apiCaller   APICaller
-	mu          *sync.RWMutex
+	mutex       *sync.RWMutex
 }
 
 // GetAPICaller returns the current API caller.
 func GetAPICaller() APICaller {
-	apiCallerWrapper.mu.RLock()
-	defer apiCallerWrapper.mu.RUnlock()
+	apiCallerWrapper.mutex.RLock()
+	defer apiCallerWrapper.mutex.RUnlock()
 
 	return apiCallerWrapper.apiCaller
 }
