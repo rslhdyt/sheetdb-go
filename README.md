@@ -38,11 +38,11 @@ func main() {
     sheetDB := client.New(sheetDBUsername, sheetDBPassword, sheetDBDocumentId)
 
     // Set params
-	getContentParams := sheetdb.GetContentParams{}
+    getContentParams := sheetdb.GetContentParams{}
 
-	contents, err := sheetDB.Read.GetContent(&getContentParams)
+    contents, err := sheetDB.Read.GetContent(&getContentParams)
 
-	...
+    ...
 }
 ```
 
