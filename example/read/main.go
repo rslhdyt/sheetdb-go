@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 	"os"
 
@@ -24,7 +25,8 @@ func main() {
 
 	getContentParams := sheetdb.GetContentParams{}
 
-	contents, err := sheetDB.Read.GetContent(&getContentParams)
+  ctx := context.TODO()
+	contents, err := sheetDB.Read.GetContentWithContext(ctx, &getContentParams)
 
 	if err != nil {
 		log.Fatal(err)

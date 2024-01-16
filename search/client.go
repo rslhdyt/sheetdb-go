@@ -13,9 +13,7 @@ type Client struct {
 	APICaller sheetdb.APICaller
 }
 
-func (c *Client) Search(body *sheetdb.SearchParams) (*sheetdb.Content, error) {
-	ctx := context.Background()
-
+func (c *Client) Search(ctx context.Context, body *sheetdb.SearchParams) (*sheetdb.Content, error) {
 	response := &sheetdb.Content{}
 
 	path := fmt.Sprintf("%s/api/v1/%s/search", c.Opt.BaseUrl, c.Opt.DocumentId)
@@ -37,9 +35,7 @@ func (c *Client) Search(body *sheetdb.SearchParams) (*sheetdb.Content, error) {
 }
 
 // Return single object of Content
-func (c *Client) Find(body *sheetdb.SearchParams) (*sheetdb.Content, error) {
-  ctx := context.Background()
-
+func (c *Client) Find(ctx context.Context, body *sheetdb.SearchParams) (*sheetdb.Content, error) {
   response := &sheetdb.Content{}
 
   (*body)["single_object"] = "true"
@@ -62,9 +58,7 @@ func (c *Client) Find(body *sheetdb.SearchParams) (*sheetdb.Content, error) {
 	return response, nil
 }
 
-func (c *Client) SearchOr(body *sheetdb.SearchParams) (*sheetdb.Content, error) {
-	ctx := context.Background()
-
+func (c *Client) SearchOr(ctx context.Context, body *sheetdb.SearchParams) (*sheetdb.Content, error) {
 	response := &sheetdb.Content{}
 
 	path := fmt.Sprintf("%s/api/v1/%s/search_or", c.Opt.BaseUrl, c.Opt.DocumentId)

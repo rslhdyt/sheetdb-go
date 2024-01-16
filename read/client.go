@@ -14,8 +14,10 @@ type Client struct {
 }
 
 func (c *Client) GetContent(body *sheetdb.GetContentParams) (*sheetdb.Contents, error) {
-	ctx := context.Background()
+  return c.GetContentWithContext(context.Background(), body)
+}
 
+func (c *Client) GetContentWithContext(ctx context.Context, body *sheetdb.GetContentParams) (*sheetdb.Contents, error) {
 	response := &sheetdb.Contents{}
 
 	path := fmt.Sprintf("%s/api/v1/%s", c.Opt.BaseUrl, c.Opt.DocumentId)
@@ -36,9 +38,11 @@ func (c *Client) GetContent(body *sheetdb.GetContentParams) (*sheetdb.Contents, 
 	return response, nil
 }
 
-func (c *Client) GetKeys() (*sheetdb.TableKeys, error) {
-	ctx := context.Background()
+func(c *Client) GetKeys() (*sheetdb.TableKeys, error) {
+  return c.GetKeysWithContext(context.Background())
+}
 
+func (c *Client) GetKeysWithContext(ctx context.Context) (*sheetdb.TableKeys, error) {
 	response := &sheetdb.TableKeys{}
 
 	path := fmt.Sprintf("%s/api/v1/%s/keys", c.Opt.BaseUrl, c.Opt.DocumentId)
@@ -59,9 +63,7 @@ func (c *Client) GetKeys() (*sheetdb.TableKeys, error) {
 	return response, nil
 }
 
-func (c *Client) DocumentName() (*sheetdb.DocumentName, error) {
-	ctx := context.Background()
-
+func (c *Client) DocumentName(ctx context.Context) (*sheetdb.DocumentName, error) {
 	response := &sheetdb.DocumentName{}
 
 	path := fmt.Sprintf("%s/api/v1/%s/name", c.Opt.BaseUrl, c.Opt.DocumentId)
@@ -82,9 +84,7 @@ func (c *Client) DocumentName() (*sheetdb.DocumentName, error) {
 	return response, nil
 }
 
-func (c *Client) Count() (*sheetdb.Count, error) {
-	ctx := context.Background()
-
+func (c *Client) Count(ctx context.Context) (*sheetdb.Count, error) {
 	response := &sheetdb.Count{}
 
 	path := fmt.Sprintf("%s/api/v1/%s/count", c.Opt.BaseUrl, c.Opt.DocumentId)

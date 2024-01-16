@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 	"os"
 
@@ -26,7 +27,8 @@ func main() {
 		"Name": "Rumi",
 	}
 
-	content, err := sheetDB.Search.Find(&searchParams)
+  ctx := context.TODO()
+	content, err := sheetDB.Search.Find(ctx, &searchParams)
 
 	if err != nil {
 		log.Fatal(err)
